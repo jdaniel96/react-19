@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "usernamehw.errorlens", // Error Lens => https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+    "dbaeumer.vscode-eslint", // ESLint => https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+    "esbenp.prettier-vscode", // Prettier => https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+    "bradlc.vscode-tailwindcss" // Tailwind CSS IntelliSense => https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+  ]
+}
