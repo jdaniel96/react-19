@@ -182,6 +182,12 @@ export default tseslint.config(
       }
     }
   },
+  {
+    files: ['**/components/Shadcn/**/*.{ts,tsx}'],
+    rules: {
+      'react/boolean-prop-naming': 'off'
+    }
+  },
   allowDefaultExportFiles,
   js.configs.recommended,
   ...tseslint.configs.strict,
