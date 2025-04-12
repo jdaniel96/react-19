@@ -2,7 +2,6 @@
 
 @import 'tailwindcss';
 @import 'tailwindcss/preflight';
-@import 'tailwindcss-animate';
 
 @layer base {
   :root {

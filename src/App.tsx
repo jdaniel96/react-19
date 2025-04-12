@@ -1,5 +1,3 @@
-import './App.css'
-
 export const App = () => {
-  return <h1>Reacty</h1>
+  return <h1>React 19</h1>
 }
