@@ -10,7 +10,7 @@ import prettierConfig from 'eslint-config-prettier'
 import unusedImportsPlugin from 'eslint-plugin-unused-imports'
 
 const reactRules = {
-  'react/boolean-prop-naming': ['error', { rule: '^(is|has|should)[A-Z]([A-Za-z0-9]?)+' }],
+  'react/boolean-prop-naming': ['error', { rule: '^(is|has|can|should)[A-Z]([A-Za-z0-9]?)+' }],
   'react/hook-use-state': 'error',
   'react/jsx-boolean-value': 'error',
   'react/jsx-fragments': ['error', 'syntax'],
@@ -50,7 +50,6 @@ const typescriptRules = {
   ]
 }
 
-// Reglas para exports nombrados y manejo de imports
 const codeStyleRules = {
   'no-restricted-exports': [
     'error',
@@ -64,31 +63,58 @@ const codeStyleRules = {
       }
     }
   ],
-  'perfectionist/sort-imports': [
+  'no-restricted-syntax': [
     'error',
     {
-      type: 'natural',
-      order: 'asc',
-      newlinesBetween: 'always',
-      groups: [
-        ['builtin', 'external'],
-        'internal',
-        ['parent', 'sibling', 'index'],
-        'style',
-        'type'
-      ]
+      selector: 'ExportAllDeclaration[exportKind!="type"][source.value!=/\\.types?$/]',
+      message: 'Use named exports instead of export *. Only allowed for types or from .type files'
     }
   ],
-  // Auto-fix para imports no utilizados
-  'no-unused-vars': 'off', // Desactivamos la regla base para evitar duplicados
-  '@typescript-eslint/no-unused-vars': ['error', { 
+  'perfectionist/sort-interfaces': ['error', {
+    newlinesBetween: 'never',
+  }],
+  'perfectionist/sort-objects': [
+    'error', {
+      newlinesBetween: 'never',
+    }
+  ],
+  'perfectionist/sort-jsx-props': ['error', {
+    newlinesBetween: 'never',
+  }],
+  'perfectionist/sort-enums': ['error', {
+    newlinesBetween: 'never',
+  }],
+  'perfectionist/sort-imports': ['error', {
+    internalPattern: ['^@/(.*)$'],
+    groups: [
+      'react',
+      ['builtin', 'external'],
+      'internal-type',
+      'internal',
+      ['parent-type', 'sibling-type', 'index-type'],
+      ['parent', 'sibling', 'index'],
+      'object',
+      'unknown',
+    ],
+    customGroups: {
+      value: {
+        react: ['^react$', '^react-.+'],
+      },
+      type: {
+        react: ['^react$', '^react-.+'],
+      }
+    }
+  }],
+  // Auto-fix for unused imports
+  'no-unused-vars': 'off',
+  '@typescript-eslint/no-unused-vars': ['error', {
     varsIgnorePattern: '^_',
     argsIgnorePattern: '^_'
   }],
   'unused-imports/no-unused-imports': 'error',
   'unused-imports/no-unused-vars': [
     'error',
-    { 
+    {
       vars: 'all',
       varsIgnorePattern: '^_',
       args: 'after-used',
@@ -97,9 +123,8 @@ const codeStyleRules = {
   ]
 }
 
-// Configuración para archivos que permiten export default
 const allowDefaultExportFiles = {
-  files: ['**/pages/**/*', '**/routes/**/*', '**/App.tsx', '**/main.tsx', '**/vite.config.ts'],
+  files: ['**/pages/**/*', '**/main.tsx', '**/vite.config.ts'],
   rules: {
     'no-restricted-exports': 'off'
   }
